@@ -1,0 +1,80 @@
+form {
+  margin-top: 36px;
+  margin-left: 156px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+
+input[name='delay'] {
+  margin-top: 8px;
+  margin-bottom: 16px;
+  padding: 8px 16px;
+  border: 1px solid #808080;
+  border-radius: 4px;
+  width: 360px;
+  height: 40px;
+  display: block;
+}
+
+input[name='delay']:hover {
+  border: 1px solid #000;
+}
+
+input[name='delay']:active {
+  border: 1px solid #4e75ff;
+}
+
+fieldset legend {
+  margin-bottom: 14px;
+  margin-left: 28px;
+}
+
+fieldset {
+  border-radius: 4px;
+  stroke-width: 1px;
+  stroke: #808080;
+  margin-bottom: 24px;
+  width: 360px;
+  height: 78px;
+  padding: 0;
+  display: flex;
+}
+
+fieldset:hover,
+fieldset:active {
+  border-radius: 4px;
+  stroke-width: 1px;
+  stroke: #000;
+}
+
+fieldset label {
+  margin-left: 48px;
+  width: 112px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+input[type='radio'] {
+  border: 1px solid #757575;
+  border-radius: 14px;
+  width: 20px;
+  height: 20px;
+}
+
+button[type='submit'] {
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 360px;
+  height: 40px;
+  background: #4e75ff;
+  color: #fff;
+}
+
+button[type='submit']:hover {
+  background: #6c8cff;
+}
