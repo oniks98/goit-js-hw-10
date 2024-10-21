@@ -2,62 +2,50 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 const form = document.querySelector('.form');
-// const button = document.querySelector('button');
-// const delay = document.querySelector('input[name="delay"]');
 
-let valuePromise = null;
-let delay = null;
-let value = null;
+form.addEventListener('submit', createMessage);
 
-form.addEventListener('submit', createNotification);
-
-// function choosePromise(event) {
-
-// }
-// function createPromise(valuePromise) {}
-
-function createNotification(event) {
+function createMessage(event) {
   event.preventDefault();
 
-  delay = event.target.elements.delay.value;
+  const delay = +event.target.elements.delay.value;
+  const statePromise = event.target.elements.state.value;
 
-  if (event.target.elements.state.value === 'fulfilled') valuePromise = true;
-  if (event.target.state.value === 'rejected') valuePromise = false;
+  makePromise(delay, statePromise)
+    .then(мessageFulfilled)
+    .catch(мessageRejected);
+}
 
-  function makePromise({ value, delay, valuePromise }) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (valuePromise) {
-          value = iziToast.show({
-            message: `✅ Fulfilled promise in ${delay}ms`,
-            messageColor: 'white',
-            messageSize: '18',
-            backgroundColor: 'green',
-            position: 'topCenter',
-            timeout: 3000,
-          });
-        }
-        if (!valuePromise) {
-          value = iziToast.show({
-            message: `❌ Rejected promise in ${delay}ms`,
-            messageColor: 'white',
-            messageSize: '18',
-            backgroundColor: 'red',
-            position: 'topCenter',
-            timeout: 3000,
-          });
-        }
+function makePromise(delay, statePromise) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (statePromise === 'fulfilled') {
+        resolve(delay);
+      } else {
+        reject(delay);
+      }
+    }, delay);
+  });
+}
 
-        if (valuePromise) {
-          resolve(value);
-        } else {
-          reject(value);
-        }
-      }, delay);
-    });
-  }
+function мessageFulfilled(delay) {
+  iziToast.show({
+    message: `✅ Fulfilled promise in ${delay}ms`,
+    messageColor: 'white',
+    messageSize: '18',
+    backgroundColor: 'green',
+    position: 'topCenter',
+    timeout: 3000,
+  });
+}
 
-  makePromise({ value, delay, valuePromise })
-    .then(value => value)
-    .catch(value => value);
+function мessageRejected(delay) {
+  iziToast.show({
+    message: `❌ Rejected promise in ${delay}ms`,
+    messageColor: 'white',
+    messageSize: '18',
+    backgroundColor: 'red',
+    position: 'topCenter',
+    timeout: 3000,
+  });
 }
